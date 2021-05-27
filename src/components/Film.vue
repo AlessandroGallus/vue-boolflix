@@ -1,10 +1,10 @@
 <template>
   <div class="film">
-    
+    {{changeimage(movie.original_language)}}
     <p>{{movie.title}}</p>
     <p>{{movie.original_title}}</p>
     <!-- <p><img src="../assets/flag_it.jpg" alt=""></p> -->
-    <p><img :src="changeimage(movie.original_language)" :alt="movie.original_language"></p>
+    <p><img :src="img_url" :alt="movie.original_language"></p>
     <p>{{movie.vote_average}}</p>
     <p>{{movie.overview}}</p>
   </div>
@@ -17,6 +17,7 @@ export default {
   },
   data(){
     return{
+      img_url:'',
       original_language:''
     }
   },
@@ -25,7 +26,7 @@ export default {
     changeimage(ol){
       let str = '../assets/flag_' + ol + '.jpg'
       console.log(str)
-     return(str)
+     this.img_url = str
     }
   }
 }
