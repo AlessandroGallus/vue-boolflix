@@ -1,19 +1,28 @@
 <template>
   <div id="app">
     
-    <Header @query="search"/>
+    <Header 
+    @query="search"
+    @language="changeLanguage"
+    @switch_value="changeType"
+    />
     <main>
-      <Film 
+      <div class="films">
+        <Film 
         v-for="(film, index_film) in films"
         :key="index_film"
+        :class="(show_films) ? 'show' : 'hide'"
         :movie="film"
-        class='hide'
       />
-      <Serie 
+      </div>
+      <div class="series">
+        <Serie 
         v-for="(serie, index_serie) in series"
         :key="index_serie"
-        :serie="serie"
+        :class="(show_series) ? 'show' : 'hide'"
+        :serietv="serie"
       />
+      </div>
     </main>
   </div>
 </template>
@@ -28,8 +37,12 @@ export default {
   name: 'App',
   data(){
     return{
+      show_films:true,
+      show_series:true,
+      query_search:'',
       films:[],
       series:[],
+      lang:'it-IT'
     }
   },
   components: {
@@ -39,24 +52,41 @@ export default {
   },
   methods:{
     search(query){
-      axios.get('https://api.themoviedb.org/3/search/movie/?api_key=a095e7fba1e47219b477d93c8457cf97&language=it-IT&query=' + query)
+      this.query_search = query
+      axios.get('https://api.themoviedb.org/3/search/movie/?api_key=a095e7fba1e47219b477d93c8457cf97&language='+this.lang+'&query=' + query)
     .then(res=> {
       this.films = res.data.results
       console.log(this.films)
-      console.log('ciao')
     })
     .catch(err=>{
       console.log(err)
-    })
+    });
     axios.get('https://api.themoviedb.org/3/search/tv/?api_key=a095e7fba1e47219b477d93c8457cf97&language=it-IT&query=' + query)
-    .then(res=> {
-      this.series = res.data.results
+    .then(ress=> {
+      this.series = ress.data.results
       console.log(this.series)
-      console.log('ciao')
     })
-    .catch(err=>{
-      console.log(err)
+    .catch(errr=>{
+      console.log(errr)
     })
+    },
+    changeLanguage(language){
+      this.lang = language
+      console.log(language)
+      this.search(this.query_search)
+    },
+    changeType(value){
+      console.log(value)
+      if(value == 2){
+        this.show_films=true
+        this.show_series=false
+      }else if(value == 3){
+        this.show_series=true
+        this.show_films=false
+      }else {
+        this.show_films=true
+        this.show_series=true
+      }
     }
   }
 }
@@ -69,6 +99,9 @@ main{
   height:100%;
   width:100%;
   background-color: yellowgreen;
+}
+.show{
+  display: block;
 }
 .hide{
   display:none;

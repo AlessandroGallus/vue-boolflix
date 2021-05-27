@@ -1,6 +1,6 @@
 <template>
   <div class="serie">
-    <p>{{serie.name}}</p>
+    <p>{{serietv.name}}</p>
     
   </div>
 </template>
@@ -8,15 +8,15 @@
 <script>
 export default {
   props:{
-    movie:Object
+    serietv:Object
   }
 }
 </script>
 
 <style>
-  .film{
+  .serie{
     width:100%;
     height: 200px;
-    background-color: yellow;
+    background-color: green;
   }
 </style>

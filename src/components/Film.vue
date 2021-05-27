@@ -4,6 +4,7 @@
     <p>{{movie.original_title}}</p>
     <p>{{movie.original_language}}</p>
     <p>{{movie.vote_average}}</p>
+    <p>{{movie.overview}}</p>
   </div>
 </template>
 
