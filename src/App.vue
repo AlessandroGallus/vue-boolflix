@@ -52,6 +52,7 @@ export default {
   },
   methods:{
     search(query){
+      if(query!=''){
       this.query_search = query
       axios.get('https://api.themoviedb.org/3/search/movie/?api_key=a095e7fba1e47219b477d93c8457cf97&language='+this.lang+'&query=' + query)
     .then(res=> {
@@ -69,6 +70,8 @@ export default {
     .catch(errr=>{
       console.log(errr)
     })
+      }
+      
     },
     changeLanguage(language){
       this.lang = language
@@ -87,7 +90,7 @@ export default {
         this.show_films=true
         this.show_series=true
       }
-    }
+    },
   }
 }
 </script>

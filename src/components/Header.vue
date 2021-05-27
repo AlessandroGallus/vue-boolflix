@@ -8,7 +8,7 @@
     </div>
     <div class="language_and_select">
       <img 
-        src="../assets/flag_italy.jpg"
+        src="../assets/flag_it.jpg"
         alt="bandiera italiana"
         @click.prevent="switchIta"
         >
@@ -18,7 +18,7 @@
         <option value="3">TV Series</option>
       </select>
       <img 
-        src="../assets/flag_uk.webp" 
+        src="../assets/flag_en.jpg" 
         alt="bandiera UK" 
         @click.prevent="switchEng">
     </div>
